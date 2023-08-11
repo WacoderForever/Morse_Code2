@@ -13,15 +13,17 @@ struct CTextStack *render_morse_to_eng(char *result){
                 s->open(s,CTEXT_H2);
                     s->segment_text(s,"Morse to English Converter");
                 s->close(s,CTEXT_H2);
-                s->$open(s,CTEXT_INPUT,R"(name="morse_text" placeholder="Enter morse text")");
-                s->auto$close(s,CTEXT_BR,"");
-                create_button(s,"Convert");
-
+                s->$open(s,CTEXT_FORM,R"(action="/morse_to_eng" method="POST")")
+                    s->$open(s,CTEXT_INPUT,R"(name="morse_text" placeholder="Enter morse text")");
+                    s->auto$close(s,CTEXT_BR,"");
+                    create_button(s,"Convert");
+                s->close(s,FORM);
                 if(result != NULL){
                     s->$open(s,CTEXT_H3);
                         s->segment_text(s,result);
                     s->close(s,CTEXT_H3);
                 }
+                
             s->close(s,CTEXT_DIV);
         s->close(s,CTEXT_BODY);
     s->close(s,CTEXT_HTML);
